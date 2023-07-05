@@ -3,8 +3,9 @@ public:
     
     bool valid(int i,int j,int m,int n)
     {
-        if(i>=0 && i<m && j<n && j>=0)return true;
-      return false;
+        if(i<0 || j<0 || j>=n || i>=m)return false;
+      return true;
+        
     }
 
  
