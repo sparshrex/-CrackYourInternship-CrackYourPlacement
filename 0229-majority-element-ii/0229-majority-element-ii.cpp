@@ -1,44 +1,49 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-
-         int sz = nums.size();
-        int num1 = -1, num2 = -1, count1 = 0, count2 = 0, i;
-        for (i = 0; i < sz; i++)
+  int cnt1=0 ,ele1=0,cnt2=0,ele2=0;
+        
+        int n = nums.size();
+        
+        for(int i=0;i<n;i++)
         {
-            if (nums[i] == num1)
-                count1++;
-            else if (nums[i] == num2)
-                count2++;
-            else if (count1 == 0)
+            if(cnt1==0  && ele2 !=nums[i])
             {
-                num1 = nums[i];
-                count1 = 1;
-            }    
-            else if (count2 == 0)
+                ele1 = nums[i];
+                cnt1=1;
+                
+            }            
+
+             else if(cnt2==0  && ele1 !=nums[i])
             {
-                num2 = nums[i];
-                count2 = 1;
+                ele2 = nums[i];
+                   cnt2=1;
+                
             }
+            else if(ele1==nums[i])cnt1++;
+            else if(ele2 ==nums[i])cnt2++;
             else
             {
-                count1--;
-                count2--;
+                cnt2--;
+                cnt1--;
             }
         }
-        vector<int> ans;
-        count1 = count2 = 0;
-        for (i = 0; i < sz; i++)
+        int fcnt1=0,fcnt2=0;
+        vector<int>ans;
+        for(int i=0;i<n;i++)
         {
-            if (nums[i] == num1)
-                count1++;
-            else if (nums[i] == num2)
-                count2++;
+            if(ele1==nums[i])
+                fcnt1++;
+            else if(ele2==nums[i])
+                fcnt2++;
+            
+           
         }
-        if (count1 > sz/3)
-            ans.push_back(num1);
-        if (count2 > sz/3)
-            ans.push_back(num2);
+         if(fcnt1>n/3)
+         ans.push_back(ele1);
+            
+            if(fcnt2>n/3)ans.push_back(ele2);
+        
         return ans;
     }
 };
